@@ -110,6 +110,7 @@ public class Export {
 	public static String getString(Date d) {
 		return new SimpleDateFormat("yyyy-MM-dd").format(d);
 	}
+	
 	public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException {
 		importData();
     }
