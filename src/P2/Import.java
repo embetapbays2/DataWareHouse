@@ -21,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Export {
-    public static void exportData() throws IOException, ClassNotFoundException, SQLException {
+    public static void importData() throws IOException, ClassNotFoundException, SQLException {
     	Class.forName("com.mysql.jdbc.Driver");
 		Connection connectionControl = DriverManager.getConnection("jdbc:mysql://localhost:3306/warehouse", "root", "");
 		Statement statementControl = connectionControl.createStatement();
@@ -111,6 +111,6 @@ public class Export {
 		return new SimpleDateFormat("yyyy-MM-dd").format(d);
 	}
 	public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException {
-		exportData();
+		importData();
     }
 }
