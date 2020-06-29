@@ -7,10 +7,10 @@ import java.time.format.DateTimeFormatter;
 
 public class LoadtoDW {
 	static String start = null;
-	static String stop= null;
+	static String stop = null;
 
-	private static void getFileFromStagging(String jdbcURL, String username, String password) throws SQLException {
-		// Thoi gian
+	private static void StagingtoDataWarehouse(String jdbcURL, String username, String password) throws SQLException {
+		// In ra thoi gian
 		DateTimeFormatter DTF = DateTimeFormatter.ofPattern("HH:mm:ss yyyy/MM/dd");
 		LocalDateTime now = LocalDateTime.now();
 		start = DTF.format(now);
@@ -72,25 +72,23 @@ public class LoadtoDW {
 			sta.executeUpdate(updateLog);
 			System.out.println("Cap nhat trang thai");
 		}
-		String updateLogTimeStart = "UPDATE datacontrol.log SET  log.timestart ='" 
-				+ start
+		String updateLogTimeStart = "UPDATE datacontrol.log SET  log.timestart ='" + start
 				+ "' WHERE log.idlog like '1'";
 		sta.executeUpdate(updateLogTimeStart);
 		LocalDateTime LDT = LocalDateTime.now();
 		stop = DTF.format(LDT);
-		String updateLogTimeEnd = "UPDATE datacontrol.log SET  log.timeend ='" 
-				+ stop 
-				+ "' WHERE log.idlog LIKE '1'";
+		String updateLogTimeEnd = "UPDATE datacontrol.log SET  log.timeend ='" + stop + "' WHERE log.idlog LIKE '1'";
 		sta.executeUpdate(updateLogTimeEnd);
 		System.out.println("Cap nhat lai thoi gian");
 		System.out.println(stop);
 	}
+
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		String jdbcURL = "jdbc:mysql://localhost:3306/datawarehouse";
 		String username = "root";
 		String password = "000000";
 		LoadtoDW LtoDW = new LoadtoDW();
-		LtoDW.getFileFromStagging(jdbcURL, username, password);
+		LtoDW.StagingtoDataWarehouse(jdbcURL, username, password);
 
 	}
 }
