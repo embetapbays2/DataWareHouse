@@ -20,8 +20,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Export {
-    public static void importData() throws IOException, ClassNotFoundException, SQLException {
+public class loadExcel {
+    public static void loadExcel() throws IOException, ClassNotFoundException, SQLException {
     	Class.forName("com.mysql.jdbc.Driver");
 		Connection connectionControl = DriverManager.getConnection("jdbc:mysql://localhost:3306/warehouse", "root", "");
 		Statement statementControl = connectionControl.createStatement();
@@ -39,9 +39,6 @@ public class Export {
 			Iterator<Row> rowIterator = sheet.iterator();
 			rowIterator.next();
 			
-			String sql_createtable = "CREATE TABLE students(STT INT NOT NULL auto_increment, mssv INT NOT NULL, ho VARCHAR(255) NOT NULL, ten VARCHAR(255) NOT NULL, dOB date NOT NULL, malop VARCHAR(8), tenLop VARCHAR(255), sdt INT NOT NULL, email VARCHAR(255) NOT NULL, quequan VARCHAR(255) NOT NULL, ghichu TEXT, PRIMARY KEY (STT))";
-			PreparedStatement ps_createtable = connection.prepareStatement(sql_createtable);
-			ps_createtable.execute();
 			
 			String sql = "INSERT INTO students(mssv, ho, ten, dOB, malop, tenlop, sdt, email, quequan, ghichu) VALUES(?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -116,6 +113,6 @@ public class Export {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException {
-		importData();
+		loadExcel();
     }
 }
